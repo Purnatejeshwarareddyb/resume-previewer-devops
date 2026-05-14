@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -123,6 +123,8 @@
 </style>
 </head>
 <body>
+<h2>Backend Response:</h2>
+<div id="backend-status">Loading...</div>
 <canvas id="sky-canvas"></canvas>
 <canvas id="cloud-canvas"></canvas>
 <canvas id="rain-canvas"></canvas>
@@ -923,6 +925,18 @@ function downloadLinks(){
   a.download='resume-links.csv';
   a.click();
 }
+
+</script>
+<script>
+fetch("https://resume-backend-58ls.onrender.com")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("backend-status").innerHTML = data;
+  })
+  .catch(error => {
+    document.getElementById("backend-status").innerHTML =
+      "Backend connection failed";
+  });
 </script>
 </body>
 </html>
