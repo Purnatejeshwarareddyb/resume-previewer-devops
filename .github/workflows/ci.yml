@@ -1,0 +1,31 @@
+name: Resume Previewer CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Build Maven Project
+        run: |
+          cd backend/previewer
+          mvn clean package
+
+      - name: Build Docker Containers
+        run: docker compose build
